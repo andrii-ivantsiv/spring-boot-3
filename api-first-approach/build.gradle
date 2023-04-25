@@ -26,8 +26,10 @@ dependencies {
     implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
     implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
     implementation 'io.swagger.core.v3:swagger-annotations:2.2.9'
+    implementation 'io.swagger.core.v3:swagger-models:2.2.9'
 
     testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
