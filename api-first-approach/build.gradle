@@ -1,7 +1,11 @@
 plugins {
     id 'java'
     id 'java-library'
+    id 'org.springframework.boot' version '3.0.6'
+    id 'org.openapi.generator' version '6.5.0'
 }
+
+apply plugin: 'io.spring.dependency-management'
 
 java {
     toolchain {
@@ -23,6 +27,26 @@ dependencies {
 
 dependencyLocking {
     lockAllConfigurations()
+}
+
+openApiGenerate {
+    generatorName = 'spring'
+    inputSpec = "$rootDir/openapi.yml"
+    outputDir = "$rootDir/src/main/generated"
+    packageName = 'org.api_first.approach'
+    ignoreFileOverride = "$rootDir/.openapi-generator-ignore"
+    /*globalProperties.putAll([
+            'supportingFiles': 'true',
+            'models': 'true',
+            'modeltests': 'true',
+            'api': 'true',
+            'apitests': 'true'
+    ])*/
+    configOptions.putAll([
+            delegatePattern: 'true',
+            library: 'spring-boot',
+            useSpringBoot3: 'true'
+    ])
 }
 
 test {
