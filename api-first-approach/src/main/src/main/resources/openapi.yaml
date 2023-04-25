@@ -1,0 +1,190 @@
+openapi: 3.0.2
+info:
+  contact:
+    email: test@mail.com
+  description: "Tutorials on Spring Boot and Java, thoughts about the Software Craft,\
+    \ and relevant book reviews. Because it's just as important to understand the\
+    \ Why as it is to understand the How. Have fun!"
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Reflectoring
+  version: 0.0.1-SNAPSHOT
+externalDocs:
+  description: Find out more about Reflectoring
+  url: https://reflectoring.io/about/
+servers:
+- url: https://reflectoring.swagger.io/v2
+tags:
+- description: Operations about user
+  externalDocs:
+    description: Find out more about our store
+    url: http://swagger.io
+  name: user
+paths:
+  /user:
+    post:
+      description: Create user functionality
+      operationId: createUser
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Created user object
+        required: true
+      responses:
+        default:
+          content: {}
+          description: successful operation
+      summary: Create user
+      tags:
+      - user
+      x-codegen-request-body-name: body
+      x-content-type: '*/*'
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+  /user/{username}:
+    delete:
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+      - description: The name that needs to be deleted
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "201":
+          content: {}
+          description: operation successful
+        "400":
+          content: {}
+          description: Invalid username supplied
+        "404":
+          content: {}
+          description: User not found
+      summary: Delete user
+      tags:
+      - user
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+    get:
+      operationId: getUserByName
+      parameters:
+      - description: 'The name that needs to be fetched. Use user1 for testing. '
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: successful operation
+        "404":
+          content: {}
+          description: User not found
+      summary: Get user by user name
+      tags:
+      - user
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+    put:
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+      - description: name that need to be updated
+        explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Updated user object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: successful operation
+        "400":
+          content: {}
+          description: Invalid user supplied
+        "404":
+          content: {}
+          description: User not found
+      summary: Updated user
+      tags:
+      - user
+      x-codegen-request-body-name: body
+      x-content-type: '*/*'
+      x-accepts: application/json
+      x-tags:
+      - tag: user
+components:
+  schemas:
+    User:
+      example:
+        firstName: firstName
+        lastName: lastName
+        password: password
+        userStatus: 6
+        phone: phone
+        id: 0
+        email: email
+        username: username
+      properties:
+        id:
+          format: int64
+          type: integer
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        userStatus:
+          description: User Status
+          format: int32
+          type: integer
+      type: object
+  securitySchemes:
+    reflectoring_auth:
+      flows:
+        implicit:
+          authorizationUrl: http://reflectoring.swagger.io/oauth/dialog
+          scopes:
+            write:users: modify users
+            read:users: read users
+      type: oauth2
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey

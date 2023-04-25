@@ -1,0 +1,12 @@
+src/main/java/org/api_first/approach/OpenApiGeneratorApplication.java
+src/main/java/org/api_first/approach/RFC3339DateFormat.java
+src/main/java/org/api_first/approach/api/ApiUtil.java
+src/main/java/org/api_first/approach/api/UserApi.java
+src/main/java/org/api_first/approach/api/UserApiController.java
+src/main/java/org/api_first/approach/api/UserApiDelegate.java
+src/main/java/org/api_first/approach/config/HomeController.java
+src/main/java/org/api_first/approach/config/SpringDocConfiguration.java
+src/main/java/org/api_first/approach/model/User.java
+src/main/resources/application.properties
+src/main/resources/openapi.yaml
+src/test/java/org/api_first/approach/OpenApiGeneratorApplicationTests.java

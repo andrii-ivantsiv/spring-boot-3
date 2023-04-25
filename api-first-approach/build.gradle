@@ -32,20 +32,17 @@ dependencyLocking {
 openApiGenerate {
     generatorName = 'spring'
     inputSpec = "$rootDir/openapi.yml"
-    outputDir = "$rootDir/src/main/generated"
-    packageName = 'org.api_first.approach'
+    outputDir = "$rootDir/src/main"
     ignoreFileOverride = "$rootDir/.openapi-generator-ignore"
-    /*globalProperties.putAll([
-            'supportingFiles': 'true',
-            'models': 'true',
-            'modeltests': 'true',
-            'api': 'true',
-            'apitests': 'true'
-    ])*/
     configOptions.putAll([
+            invokerPackage : "${group}",
+            basePackage    : "${group}",
+            apiPackage     : "${group}.api",
+            modelPackage   : "${group}.model",
+            configPackage  : "${group}.config",
             delegatePattern: 'true',
-            library: 'spring-boot',
-            useSpringBoot3: 'true'
+            library        : 'spring-boot',
+            useSpringBoot3 : 'true'
     ])
 }
 
