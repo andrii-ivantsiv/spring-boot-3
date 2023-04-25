@@ -1,4 +1,4 @@
-**/pom.xml
-**/README.md
-**/.openapi-generator
-**/.openapi-generator-ignore
+pom.xml
+.openapi-generator
+.openapi-generator-ignore
+**/openapi.yaml
