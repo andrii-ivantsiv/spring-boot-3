@@ -1,0 +1,21 @@
+###
+POST http://localhost:8081/user
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 1,
+  "username": "iva1",
+  "firstName": "Ivan",
+  "lastName": "Test",
+  "email": "test@mail.com"
+}
+
+<> 2021-10-23T211634.200.json
+<> 2021-10-23T211615.415.json
+
+###
+GET http://localhost:8081/user/1
+Content-Type: application/json
+
+<> 2021-10-23T211644.200.json
