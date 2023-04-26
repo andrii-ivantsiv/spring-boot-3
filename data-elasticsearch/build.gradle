@@ -30,6 +30,13 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'org.testcontainers:elasticsearch:1.18.0'
+    testImplementation 'org.testcontainers:junit-jupiter:1.18.0'
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
 
 test {

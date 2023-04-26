@@ -1,13 +1,11 @@
 package com.andiv.example.springdataelasticsearch;
 
+import com.andiv.example.springdataelasticsearch.common.BaseTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class SpringDataElasticsearchApplicationTests {
+class SpringDataElasticsearchApplicationTests extends BaseTest {
 
     @Test
     void contextLoads() {
     }
-
 }
