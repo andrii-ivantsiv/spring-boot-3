@@ -2,6 +2,7 @@ plugins {
     id('java')
     id('java-library')
     id('org.springframework.boot') version '3.0.6'
+    id('io.freefair.lombok') version '8.0.1'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -15,12 +16,6 @@ java {
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
 repositories {
     mavenCentral()
 }
@@ -28,11 +23,15 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
-    annotationProcessor 'org.projectlombok:lombok'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyLocking {
+    lockAllConfigurations()
 }
 
 test {
