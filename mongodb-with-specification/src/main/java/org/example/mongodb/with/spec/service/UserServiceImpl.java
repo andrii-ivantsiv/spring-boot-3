@@ -1,11 +1,11 @@
-package org.example.mongodb.with.jpa.spec.service;
+package org.example.mongodb.with.spec.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.mongodb.with.jpa.spec.api.SearchRequest;
-import org.example.mongodb.with.jpa.spec.api.UserRequest;
-import org.example.mongodb.with.jpa.spec.api.UserResponse;
-import org.example.mongodb.with.jpa.spec.model.User;
-import org.example.mongodb.with.jpa.spec.repository.UserRepository;
+import org.example.mongodb.with.spec.api.SearchRequest;
+import org.example.mongodb.with.spec.api.UserRequest;
+import org.example.mongodb.with.spec.api.UserResponse;
+import org.example.mongodb.with.spec.model.User;
+import org.example.mongodb.with.spec.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

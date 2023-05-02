@@ -1,8 +1,8 @@
-package org.example.mongodb.with.jpa.spec.api;
+package org.example.mongodb.with.spec.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.mongodb.with.jpa.spec.service.UserService;
+import org.example.mongodb.with.spec.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,8 +1,8 @@
-package org.example.mongodb.with.jpa.spec.api;
+package org.example.mongodb.with.spec.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.mongodb.with.jpa.spec.model.User;
-import org.example.mongodb.with.jpa.spec.repository.UserRepository;
+import org.example.mongodb.with.spec.model.User;
+import org.example.mongodb.with.spec.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * @see org.example.mongodb.with.jpa.spec.api.UserController
+ * @see UserController
  */
 @Transactional
 @Testcontainers

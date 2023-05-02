@@ -3,3 +3,4 @@
 - [data-elasticsearch](data-elasticsearch)
 - [micrometer](micrometer)
 - [rest-query-lang-with-data-specification](rest-query-lang-with-data-specification)
+- [mongodb-with-specification](mongodb-with-specification)

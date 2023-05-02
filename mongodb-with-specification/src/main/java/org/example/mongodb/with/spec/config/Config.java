@@ -1,4 +1,4 @@
-package org.example.mongodb.with.jpa.spec.config;
+package org.example.mongodb.with.spec.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package org.example.mongodb.with.jpa.spec.repository;
+package org.example.mongodb.with.spec.repository;
 
-import org.example.mongodb.with.jpa.spec.model.User;
+import org.example.mongodb.with.spec.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

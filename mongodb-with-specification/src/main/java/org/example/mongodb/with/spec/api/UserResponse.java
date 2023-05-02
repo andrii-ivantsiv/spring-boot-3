@@ -1,4 +1,4 @@
-package org.example.mongodb.with.jpa.spec.api;
+package org.example.mongodb.with.spec.api;
 
 import java.util.UUID;
 
