@@ -1,5 +1,6 @@
 package org.example.mongodb.with.spec.api;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.mongodb.with.spec.service.UserService;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -26,8 +25,17 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserResponse> findUsers(@RequestParam(name = "name", required = false) String name) {
-        final SearchRequest searchRequest = SearchRequest.builder().name(name).build();
+    public List<UserResponse> findUsers(
+            @RequestParam(name = "firstName", required = false) String firstName,
+            @RequestParam(name = "lastName", required = false) String lastName,
+            @RequestParam(name = "address", required = false) String address,
+            @RequestParam(name = "index", required = false) Integer index) {
+        final SearchRequest searchRequest = SearchRequest.builder()
+                .firstName(firstName)
+                .lastName(lastName)
+                .address(address)
+                .index(index)
+                .build();
         log.debug("Find user {}", searchRequest);
         return userService.find(searchRequest);
     }

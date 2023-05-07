@@ -9,6 +9,7 @@ plugins {
     id('java')
     id('org.springframework.boot') version('3.0.6')
     id('io.freefair.lombok') version('8.0.1')
+    id('com.diffplug.spotless') version('6.18.0')
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -23,6 +24,8 @@ repositories {
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
+    implementation('com.querydsl:querydsl-mongodb:5.0.0')
+    annotationProcessor("com.querydsl:querydsl-apt:5.0.0")
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.junit.jupiter:junit-jupiter:5.9.3')
@@ -42,4 +45,18 @@ java {
 
 test {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        toggleOffOn()
+        palantirJavaFormat()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }

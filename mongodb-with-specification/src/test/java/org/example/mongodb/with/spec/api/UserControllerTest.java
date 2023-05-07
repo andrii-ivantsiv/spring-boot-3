@@ -1,6 +1,14 @@
 package org.example.mongodb.with.spec.api;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 import org.example.mongodb.with.spec.model.User;
 import org.example.mongodb.with.spec.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -14,15 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @see UserController
@@ -52,40 +51,41 @@ class UserControllerTest {
 
     @Test
     void createUserTest() throws Exception {
-        final UserRequest userRequest = new UserRequest("John");
+        final UserRequest userRequest = new UserRequest("John", "Dou", "Str", 12345);
 
         mockMvc.perform(put("/user")
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRequest)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())
-                .andExpect(jsonPath("$.name").value(userRequest.name()));
+                .andExpect(jsonPath("$.firstName").value(userRequest.firstName()));
 
         assertEquals(1, userRepository.findAll().size());
     }
 
     @Test
     void findUsersTest() throws Exception {
-        final String userName = "User2";
-        userRepository.saveAll(
-                List.of(
-                        createUser("User1"),
-                        createUser(userName),
-                        createUser("User3")
-                )
-        );
+        userRepository.saveAll(List.of(
+                createUser("UserF1", "UserL1", "Address1", 12345),
+                createUser("UserF2", "UserL2", "Address2", 12354),
+                createUser("UserF3", "UserL3", "Address3", 54321)));
 
-        mockMvc.perform(get("/user?name={userName}", userName)
-                        .contentType(APPLICATION_JSON))
+        mockMvc.perform(get("/user?firstName=UserF2&index=12354").contentType(APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[*].id").isNotEmpty())
-                .andExpect(jsonPath("$[*].name").value(userName));
+                .andExpect(jsonPath("$[*].firstName").value("UserF2"))
+                .andExpect(jsonPath("$[*].lastName").value("UserL2"))
+                .andExpect(jsonPath("$[*].address").value("Address2"))
+                .andExpect(jsonPath("$[*].index").value(12354));
     }
 
-    private User createUser(String name) {
+    private User createUser(String firstName, String lastName, String address, Integer index) {
         final User user = new User();
-        user.setName(name);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setAddress(address);
+        user.setIndex(index);
         return user;
     }
 }

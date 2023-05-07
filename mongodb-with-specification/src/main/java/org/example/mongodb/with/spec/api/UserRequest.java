@@ -1,4 +1,6 @@
 package org.example.mongodb.with.spec.api;
 
-public record UserRequest(String name) {
-}
+import lombok.Builder;
+
+@Builder
+public record UserRequest(String firstName, String lastName, String address, Integer index) {}

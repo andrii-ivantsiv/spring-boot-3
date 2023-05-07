@@ -1,17 +1,15 @@
 package org.example.mongodb.with.spec.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.example.mongodb.with.spec.api.SearchRequest;
 import org.example.mongodb.with.spec.api.UserRequest;
 import org.example.mongodb.with.spec.api.UserResponse;
 import org.example.mongodb.with.spec.model.User;
+import org.example.mongodb.with.spec.repository.UserQueryExample;
 import org.example.mongodb.with.spec.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
-import static org.springframework.util.StringUtils.hasText;
 
 @Service
 @Transactional
@@ -22,25 +20,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse save(UserRequest userRequest) {
         final User userToSave = new User();
-        userToSave.setName(userRequest.name());
-        final User savedUser = userRepository.save(userToSave);
-        return new UserResponse(savedUser.getId(), savedUser.getName());
+        userToSave.setFirstName(userRequest.firstName());
+        userToSave.setLastName(userRequest.lastName());
+        userToSave.setAddress(userRequest.address());
+        userToSave.setIndex(userRequest.index());
+        return UserConverter.convertToResponse(userRepository.save(userToSave));
     }
 
     @Override
     public List<UserResponse> find(SearchRequest searchRequest) {
-        if (hasText(searchRequest.name())) {
-            return userRepository.findByName(searchRequest.name()).stream()
-                    .map(this::convert)
-                    .toList();
-        } else {
-            return userRepository.findAll().stream()
-                    .map(this::convert)
-                    .toList();
-        }
-    }
-
-    private UserResponse convert(User user) {
-        return new UserResponse(user.getId(), user.getName());
+        return userRepository.findAll(UserQueryExample.of(searchRequest)).stream()
+                .map(UserConverter::convertToResponse)
+                .toList();
     }
 }
